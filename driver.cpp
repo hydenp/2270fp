@@ -22,7 +22,7 @@ int main() {
 
     // seed random number generator and vector to store stearches
     srand(time(0));
-    vector<int> s;
+    vector<int> sn;
 
 
     // read in all the values to vals array
@@ -30,17 +30,25 @@ int main() {
     int i = 0;
     while(getline(read, num, ',')) {
         vals[i] = stoi(num);
+        i++;
+    }
+
+    for(int i = 0; i < 40000; ++i) {
+        cout << i << " " << vals[i] << endl;
     }
 
     // insert values 100 at a time and measure the average time for each
     for(int i = 0; i < 400; ++i) {
 
+        // next stopping place
+        int s = (i * 100) + 100;
+        
         // start the clock
         auto startI = high_resolution_clock::now();
 
         // insert the nest 100 elements
-        for(int j = (i * 100); j < (j + 100); ++j) {
-            // insert 
+        for(int j = (i * 100); j < s; ++j) {
+            // insert
         }
 
         // stop the clock and calculate difference
@@ -53,11 +61,13 @@ int main() {
         timeI = timeI / 100.0;
         insert[i] = timeI;
 
+        
+
         // find a 100 random numbers within the inserted data to search for
         // put them in the search vector
         for(int k = 0; k < 100; ++k) {
             int ri = rand() % (i * 100);
-            s.push_back(vals[ri]);
+            sn.push_back(vals[ri]);
         }
 
         // search for each of the hundred randomly selected values
@@ -65,7 +75,7 @@ int main() {
         auto startS = high_resolution_clock::now();
         for(int l = 0; l < 100; ++l) {
             // search for the values for example
-            // bst.insert(s[l]);
+            // bst.insert(sn[l]);
         }
         // stop the clock and calculate difference
         auto stopS = high_resolution_clock::now();
@@ -77,10 +87,12 @@ int main() {
         timeS = timeS / 100.0;
         search[i] = timeS;
         // clear search values
-        s.clear();
+        sn.clear();
+
+
     }
 
-
+    // ------------------------------------------------------------------------
     // write results to output csv
 
     // write insert times;
@@ -98,6 +110,7 @@ int main() {
         writeS << search[i] << endl;
     }
     writeS.close();
+
 
 
     return 0;
