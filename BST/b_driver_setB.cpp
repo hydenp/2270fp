@@ -3,11 +3,16 @@
 #include <chrono> 
 #include <cstdlib>
 #include <vector>
+#include "BST.hpp"
 
 using namespace std;
 using namespace std::chrono;
 
 int main() {
+
+    // initilize class for insertion and search
+    BST b;
+    string structureName = "BST";
 
     // array holding values read from file
     int vals[40000];
@@ -18,7 +23,7 @@ int main() {
 
     // open stream to read file
     ifstream read;
-    read.open("dataSetA.csv");
+    read.open("dataSetB.csv");
 
     // seed random number generator and vector to store stearches
     srand(time(0));
@@ -33,9 +38,6 @@ int main() {
         i++;
     }
 
-    for(int i = 0; i < 40000; ++i) {
-        cout << i << " " << vals[i] << endl;
-    }
 
     // insert values 100 at a time and measure the average time for each
     for(int i = 0; i < 400; ++i) {
@@ -48,7 +50,7 @@ int main() {
 
         // insert the nest 100 elements
         for(int j = (i * 100); j < s; ++j) {
-            // insert
+            b.insert(vals[j]);
         }
 
         // stop the clock and calculate difference
@@ -60,22 +62,23 @@ int main() {
         // divide the valude by 100 and add to the insert times
         timeI = timeI / 100.0;
         insert[i] = timeI;
-
         
 
         // find a 100 random numbers within the inserted data to search for
         // put them in the search vector
         for(int k = 0; k < 100; ++k) {
-            int ri = rand() % (i * 100);
+            int ri = rand() % ( (i * 100) + 100);
             sn.push_back(vals[ri]);
         }
+
+
 
         // search for each of the hundred randomly selected values
         // start the clock
         auto startS = high_resolution_clock::now();
         for(int l = 0; l < 100; ++l) {
             // search for the values for example
-            // bst.insert(sn[l]);
+            b.insert(sn[l]);
         }
         // stop the clock and calculate difference
         auto stopS = high_resolution_clock::now();
@@ -95,23 +98,28 @@ int main() {
     // ------------------------------------------------------------------------
     // write results to output csv
 
+
     // write insert times;
+    string insert_Dst = "setB_insertionTimes.csv";
+    string insert_endDst = structureName + "_" + insert_Dst;
+    
     ofstream writeI;
-    writeI.open("insertionTimes.csv");
+    writeI.open(insert_endDst);
     for(int i = 0; i < 400; ++i) {
         writeI << insert[i] << endl;
     }
     writeI.close();
 
     // write search times;
+    string search_Dst = "setB_searchTimes.csv";
+    string search_endDst = structureName + "_" + search_Dst;
+
     ofstream writeS;
-    writeS.open("searchTimes.csv");
+    writeS.open(search_endDst);
     for(int i = 0; i < 400; ++i) {
         writeS << search[i] << endl;
     }
     writeS.close();
-
-
 
     return 0;
 }
