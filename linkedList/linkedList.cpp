@@ -19,6 +19,7 @@ LinkedList::~LinkedList()
     head = 0;
 }
 
+// insert function to put in new nodes
 void LinkedList::insert(Node * left, int key)
 {
     Node* temp = new Node(key, 0);
@@ -37,6 +38,7 @@ void LinkedList::insert(Node * left, int key)
     return; 
 }
 
+// search function to find a node
 Node* LinkedList::search(int key)
 {
     for(Node* temp = head; temp != 0; temp = temp->next)
@@ -50,6 +52,7 @@ Node* LinkedList::search(int key)
     return 0;
 }
 
+// display function to print the linked list in order
 void LinkedList::displayList()
 {
     cout << "[ ";
