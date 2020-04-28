@@ -52,7 +52,7 @@ bool HashTable::insertItem(int key) {
             idx++;
 
             // check if we've reach the end -> start at the beginning
-            if(idx == tableSize - 1) idx = 0;
+            if(idx == tableSize) idx = 0;
 
             if(table[idx] == 0) {
                 table[idx] = n;
@@ -111,7 +111,8 @@ node* HashTable::searchItem(int key) {
         idx++;
 
         // if the next index is zero, end the search
-        if(table[idx] == 0) return 0;
+        // don't need this for implementation as we are guaranteed to find every value
+        // if(table[idx] == 0) return 0;
 
         // if we're at the end, go back to the beginning
         if(idx == 40000) idx = 0;
