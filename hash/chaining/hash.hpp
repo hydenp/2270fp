@@ -1,3 +1,6 @@
+// Hash Chaining Header Definition
+// Author: Nancy Yoder
+
 #ifndef HASH_HPP
 #define HASH_HPP
 

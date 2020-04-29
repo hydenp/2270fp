@@ -1,3 +1,6 @@
+// Linked List Header Definition
+// Author: Nancy Yoder
+
 #include <iostream>
 
 using namespace std;

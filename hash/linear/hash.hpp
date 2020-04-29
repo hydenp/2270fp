@@ -1,3 +1,6 @@
+// Hash Linear Probing Header definition
+// Author: Hyden Polikoff
+
 #ifndef HASH_HPP
 #define HASH_HPP
 
