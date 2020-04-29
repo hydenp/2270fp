@@ -21,7 +21,8 @@ class HashTable
 
     // Pointer to an array containing buckets
     node* *table;
-    int numOfcolision = 0;
+    int numInsertColl = 0;
+    int numSearchColl = 0;
     node* createNode(int key, node* next);
     
 public:
@@ -34,7 +35,8 @@ public:
     unsigned int hashFunction(int key);
 
     void printTable();
-    int getNumOfCollision();
+    int getNumInsertCol();
+    int getNumSearchCol();
 
     node* searchItem(int key);
 };

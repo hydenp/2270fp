@@ -43,7 +43,7 @@ bool HashTable::insertItem(int key) {
     }
     else {
         // if there is a collision, find the next open index
-        numOfcolision++;
+        numInsertColl++;
         int it = 1;
 
         while(true) {
@@ -80,8 +80,13 @@ void HashTable::printTable() {
 }
 
 // return the number of collisions
-int HashTable::getNumOfCollision() {
-    return numOfcolision;
+int HashTable::getNumInsertCol() {
+    return numInsertColl;
+}
+
+// return number of search Collissions
+int HashTable::getNumSearchCol() {
+    return numSearchColl;
 }
 
 
@@ -96,6 +101,8 @@ node* HashTable::searchItem(int key) {
 
     // check first instance of search
     if(table[idx]->key == key) return table[idx];
+
+    numSearchColl++;
 
     // find the node
     int it = 1;

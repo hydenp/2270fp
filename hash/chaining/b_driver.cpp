@@ -20,6 +20,8 @@ int main() {
     // arrays holding insert and search times
     double insert[400];
     double search[400];
+    int insertCol[400];
+    int searchCol[400];
 
     // open stream to read file
     ifstream read;
@@ -91,7 +93,10 @@ int main() {
         search[i] = timeS;
         // clear search values
         sn.clear();
-
+        
+        // add insert and search collisions
+        insertCol[i] = c.getNumInsertCol();
+        searchCol[i] = c.getNumSearchCol();
 
     }
 
@@ -120,6 +125,17 @@ int main() {
         writeS << search[i] << endl;
     }
     writeS.close();
+
+    // write search and insert times
+    string col_Dst = "setB_collisions.csv";
+    string col_endDst = structureName + "_" + col_Dst;
+    ofstream writeC;
+    writeC.open(col_endDst);
+    writeC << "insertCollissions,searchCollissions" << endl;
+    for(int i = 0; i < 400; ++i) {
+        writeC << insertCol[i] << "," << searchCol[i] << endl;
+    }
+    writeC.close();
 
     return 0;
 }

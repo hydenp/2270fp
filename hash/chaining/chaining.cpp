@@ -40,22 +40,11 @@ bool HashTable::insertItem(int key) {
 
     else 
     {
-        numOfcolision++;
+        numInsertColl++;
 
         node* temp = table[idx];
         table[idx] = n;
         n->next = temp;
-
-        // while(temp != NULL)
-        // {
-        //     p = temp;
-        //     temp = temp->next;
-        // }
-
-        // if (temp == NULL)
-        // {
-        //     /* code */
-        // }
 
         return true;
     }
@@ -87,8 +76,12 @@ void HashTable::printTable() {
     }
 }
 
-int HashTable::getNumOfCollision() {
-    return numOfcolision;
+int HashTable::getNumInsertCol() {
+    return numInsertColl;
+}
+
+int HashTable::getNumSearchCol() {
+    return numSearchColl;
 }
 
 node* HashTable::searchItem(int key) {
@@ -101,6 +94,7 @@ node* HashTable::searchItem(int key) {
 
     else
     {
+        numSearchColl++;
         node* temp = table[idx];
 
         while(temp != 0)

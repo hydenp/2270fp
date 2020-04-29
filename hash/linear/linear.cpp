@@ -16,8 +16,6 @@ HashTable::HashTable(int bsize) {
         table[i] = 0;
     }
 
-    // start the number of collisions at zero
-    // numOfcolision = 0;
 }
 
 // private method to create a new node for insertion
@@ -46,7 +44,7 @@ bool HashTable::insertItem(int key) {
     }
     else {
         // if there is a collision, find the next open index
-        numOfcolision++;
+        numInsertColl++;
 
         while(true) {
             idx++;
@@ -79,18 +77,15 @@ void HashTable::printTable() {
 }
 
 // return the number of collisions
-int HashTable::getNumOfCollision() {
-    return numOfcolision;
+int HashTable::getNumInsertCol() {
+    return numInsertColl;
 }
 
-/*
-
-// recursive helper?
-node* search(node* tbl, int key, int start) {
-    // check 
+// return number of search Collissions
+int HashTable::getNumSearchCol() {
+    return numSearchColl;
 }
 
-*/
 
 
 // search for a give value
@@ -101,6 +96,8 @@ node* HashTable::searchItem(int key) {
 
     // if empty, don't search
     if(table[idx] == 0) return 0;
+
+    numSearchColl++;
 
     // find the node
     while(true) {
