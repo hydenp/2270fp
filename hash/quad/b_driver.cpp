@@ -3,7 +3,7 @@
 #include <chrono> 
 #include <cstdlib>
 #include <vector>
-// #include "BST.hpp"
+#include "hash.hpp"
 
 using namespace std;
 using namespace std::chrono;
@@ -11,7 +11,7 @@ using namespace std::chrono;
 int main() {
 
     // initilize class for insertion and search
-    // BST b;
+    HashTable b(40009);
     string structureName = "hashQuadratic";
 
     // array holding values read from file
@@ -50,7 +50,7 @@ int main() {
 
         // insert the nest 100 elements
         for(int j = (i * 100); j < s; ++j) {
-            // b.insert(vals[j]);
+            b.insertItem(vals[j]);
         }
 
         // stop the clock and calculate difference
@@ -78,7 +78,7 @@ int main() {
         auto startS = high_resolution_clock::now();
         for(int l = 0; l < 100; ++l) {
             // search for the values for example
-            // b.insert(sn[l]);
+            b.searchItem(sn[l]);
         }
         // stop the clock and calculate difference
         auto stopS = high_resolution_clock::now();

@@ -38,9 +38,7 @@ bool HashTable::insertItem(int key) {
 
     // if no collision
     if(table[idx] == 0) {
-
         table[idx] = n;
-
         return true;
     }
     else {
@@ -86,36 +84,35 @@ int HashTable::getNumOfCollision() {
     return numOfcolision;
 }
 
-/*
-
-// recursive helper?
-node* search(node* tbl, int key, int start) {
-    // check 
-}
-
-*/
-
 
 // search for a give value
 node* HashTable::searchItem(int key) {
     // first hash the key
     int idx = hashFunction(key);
-    int dne = idx;
+
 
     // if empty, don't search
     if(table[idx] == 0) return 0;
+
+    // check first instance of search
+    if(table[idx]->key == key) return table[idx];
 
     // find the node
     int it = 1;
     while(true) {
 
+        // calculate the next index to be probed
         int quad = idx + pow(it, 2);
         quad = quad % tableSize;
-        
-        if(table[idx] != 0)
-            if(table[idx]->key == key) return table[idx];
 
-        // move to the iterator
+        // check the next index
+        if(table[quad] != 0)
+            if(table[quad]->key == key) return table[quad];
+
+        // check if DNE - don't need for this as every value guaranteed to be found
+        // if(table[quad] == 0) return 0;
+
+        // increment the iterator
         it++;
     }
 }
