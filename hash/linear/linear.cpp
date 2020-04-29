@@ -97,12 +97,15 @@ node* HashTable::searchItem(int key) {
     // if empty, don't search
     if(table[idx] == 0) return 0;
 
+    // check the first index
+    if(table[idx]->key == key) return table[idx];
+
+    // add a collission if the first index is not 
     numSearchColl++;
+
 
     // find the node
     while(true) {
-        
-        if(table[idx]->key == key) return table[idx];
 
         // move to the next index
         idx++;
@@ -111,8 +114,11 @@ node* HashTable::searchItem(int key) {
         // don't need this for implementation as we are guaranteed to find every value
         // if(table[idx] == 0) return 0;
 
+        // check if new index is proper 
+        if(table[idx]->key == key) return table[idx];
+
         // if we're at the end, go back to the beginning
-        if(idx == 40000) idx = 0;
+        if(idx == tableSize - 1) idx = 0;
 
         // if we have gone in a full circle, return 0;
         if(idx == dne) return 0;

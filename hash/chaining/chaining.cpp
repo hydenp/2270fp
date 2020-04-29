@@ -91,11 +91,15 @@ node* HashTable::searchItem(int key) {
     {
         return 0;
     }
+    else if(table[idx]->key == key) {
+        return table[idx];
+    }
 
     else
-    {
+    {   
+        // add a collission if original search is unsuccessful
         numSearchColl++;
-        node* temp = table[idx];
+        node* temp = table[idx]->next;
 
         while(temp != 0)
         {
